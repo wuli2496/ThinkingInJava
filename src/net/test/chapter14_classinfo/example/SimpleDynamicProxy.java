@@ -41,5 +41,6 @@ public class SimpleDynamicProxy
         consumer(real);
         Interface proxy = (Interface)Proxy.newProxyInstance(DynamicProxyHandler.class.getClassLoader(), new Class[]{Interface.class}, new DynamicProxyHandler(real));
         consumer(proxy);
+
     }
 }

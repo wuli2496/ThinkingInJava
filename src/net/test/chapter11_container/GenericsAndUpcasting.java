@@ -1,17 +1,14 @@
-package net.test.chapter11.example;
+package net.test.chapter11_container;
 
-import java.util.*;
-
-/**
- * Created by John on 2017/6/11.
- */
+import java.util.ArrayList;
 
 class GrannySmith extends Apple {}
 class Gala extends Apple {}
 class Fuji extends Apple {}
 class Braeburn extends Apple {}
 
-public class GenericAndUpcasting {
+
+public class GenericsAndUpcasting {
     public static void main(String[] args)
     {
         ArrayList<Apple> apples = new ArrayList<Apple>();
@@ -20,7 +17,7 @@ public class GenericAndUpcasting {
         apples.add(new Fuji());
         apples.add(new Braeburn());
 
-        for(Apple c : apples)
+        for (Apple c : apples)
         {
             System.out.println(c);
         }

@@ -1,10 +1,9 @@
-package net.test.chapter11.example;
+package net.test.chapter11_container;
+
+import static net.test.util.Print.*;
 
 import java.util.*;
-import static net.test.util.Print.*;
-/**
- * Created by John on 2017/6/11.
- */
+
 public class PrintingContainers {
     static Collection fill(Collection<String> collection)
     {
@@ -12,9 +11,9 @@ public class PrintingContainers {
         collection.add("cat");
         collection.add("dog");
         collection.add("dog");
+
         return collection;
     }
-
 
     static Map fill(Map<String, String> map)
     {
@@ -22,6 +21,7 @@ public class PrintingContainers {
         map.put("cat", "Rags");
         map.put("dog", "Bosco");
         map.put("dog", "Spot");
+
         return map;
     }
     public static void main(String[] args)
@@ -34,5 +34,7 @@ public class PrintingContainers {
         print(fill(new HashMap<String, String>()));
         print(fill(new TreeMap<String, String>()));
         print(fill(new LinkedHashMap<String, String>()));
+
     }
 }
+

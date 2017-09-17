@@ -5,7 +5,10 @@ public class Parcel11 {
     private static class ParcelContents implements Contents
     {
         private int i = 11;
-        public int value() {return i;}
+        public int value()
+        {
+            return i;
+        }
     }
 
     protected static class ParcelDestination implements Destination

@@ -1,5 +1,6 @@
 package net.test.util;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -16,7 +17,7 @@ public class OSExecute {
                 System.out.println(s);
             }
 
-            BufferedReader errors = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            BufferedReader errors = new BufferedReader(new InputStreamReader(process.getErrorStream(), "gbk"));
             while ((s = errors.readLine()) != null)
             {
                 System.err.println(s);

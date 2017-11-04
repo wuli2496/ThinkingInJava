@@ -1,7 +1,5 @@
 package net.test.chapter05_initializeAndCleanup;
 
-import sun.security.provider.ConfigFile;
-
 import static net.test.util.Print.*;
 
 public class Burrito {

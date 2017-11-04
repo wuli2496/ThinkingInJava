@@ -1,7 +1,5 @@
 package net.test.chapter12_exceptionProcess;
 
-import com.sun.javafx.util.Logging;
-import sun.rmi.runtime.Log;
 
 import java.util.logging.*;
 import java.io.*;

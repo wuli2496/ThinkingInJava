@@ -1,4 +1,4 @@
-package common;
+package math;
 
 public class Matrix
 {

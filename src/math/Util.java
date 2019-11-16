@@ -1,4 +1,4 @@
-package common;
+package math;
 
 public class Util
 {
@@ -59,5 +59,23 @@ public class Util
         ans = ans * Math.pow(10, n - 1);
 
         return (int)ans;
+    }
+    
+    /**
+     *   执行n轮直到最后
+     * @param n
+     * @param k
+     * @return
+     *  
+     */
+    public static int josephus(int n, int k)
+    {
+    	int res = 0;
+    	for (int i = 1; i <= n; ++i)
+    	{
+    		res = (res + k) % n;
+    	}
+    	
+    	return res;
     }
 }

@@ -81,19 +81,32 @@ public class Trie
 	
 	public boolean search(String word)
 	{
+		TrieNode node = searchPrefix(word);
+		return node != null && node.getEnd();
+	}
+	
+	public boolean startsWith(String prefix)
+	{
+		TrieNode node = searchPrefix(prefix);
+		
+		return node != null;
+	}
+	
+	protected TrieNode searchPrefix(String prefix)
+	{
 		TrieNode node = root;
-		for (int i = 0; i < word.length(); ++i)
+		for (int i = 0; i < prefix.length(); ++i)
 		{
-			char ch = word.charAt(i);
+			char ch = prefix.charAt(i);
 			int index = chMap.get(ch);
 			if (!node.containsKey(index))
 			{
-				return false;
+				return null;
 			}
 			
 			node = node.get(index);
 		}
 		
-		return node.getEnd();
+		return node;
 	}
 }

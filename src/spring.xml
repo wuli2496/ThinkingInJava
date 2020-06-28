@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<bean id="log" class="springLearn.com.gc.action.LogAround"/>
+	<bean id="timeBook" class="springLearn.com.gc.action.TimeBook"/>
+	
+	<bean id="logAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice">
+			<ref bean="log"/>
+		</property>
+		<property name="patterns">
+			<value>.*doAuditing.*</value>
+		</property>
+	</bean>
+	<bean id="logProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>springLearn.com.gc.impl.TimeBookInterface</value>
+		</property>
+		<property name="target">
+			<ref bean="timeBook"/>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>logAdvisor</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="logBefore" class="springLearn.com.gc.action.LogBefore"/>
+	<bean id="logBeforeAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice">
+			<ref bean="logBefore"/>
+		</property>
+		
+		<property name="patterns">
+			<value>.*doAuditing.*</value>
+		</property>
+	</bean>
+	<bean id="logProxy2" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>springLearn.com.gc.impl.TimeBookInterface</value>
+		</property>
+		<property name="target">
+			<ref bean="timeBook"/>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>logBeforeAdvisor</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="logAfter" class="springLearn.com.gc.action.LogAfter"/>
+	<bean id="logAfterAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice">
+			<ref bean="logAfter"/>
+		</property>
+		
+		<property name="patterns">
+			<value>.*doAuditing.*</value>
+		</property>
+	</bean>
+	<bean id="logProxy3" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>springLearn.com.gc.impl.TimeBookInterface</value>
+		</property>
+		<property name="target">
+			<ref bean="timeBook"/>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>logAfterAdvisor</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="logThrow" class="springLearn.com.gc.action.LogThrow"/>
+	<bean id="logThrowAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice">
+			<ref bean="logThrow"/>
+		</property>
+		
+		<property name="patterns">
+			<value>.*doAuditing.*</value>
+		</property>
+	</bean>
+	<bean id="logProxy4" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>springLearn.com.gc.impl.TimeBookInterface</value>
+		</property>
+		<property name="target">
+			<ref bean="timeBook"/>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>logThrowAdvisor</value>
+			</list>
+		</property>
+	</bean>
+</beans>

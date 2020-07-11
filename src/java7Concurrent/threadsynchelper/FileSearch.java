@@ -20,6 +20,7 @@ public class FileSearch implements Runnable {
 		this.phaser = phaser;
 		results = new ArrayList<>();
 	}
+	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -55,7 +56,7 @@ public class FileSearch implements Runnable {
 				if (fi.isDirectory()) {
 					directoryProcess(fi);
 				} else {
-					fileProcess(file);
+					fileProcess(fi);
 				}
 			}
 		}

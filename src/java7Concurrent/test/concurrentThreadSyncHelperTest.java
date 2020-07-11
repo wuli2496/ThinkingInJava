@@ -1,16 +1,21 @@
 package java7Concurrent.test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Exchanger;
 import java.util.concurrent.Phaser;
 
 import org.junit.Test;
 
+import java7Concurrent.threadsynchelper.Consumer;
 import java7Concurrent.threadsynchelper.FileSearch;
 import java7Concurrent.threadsynchelper.Grouper;
 import java7Concurrent.threadsynchelper.Job;
 import java7Concurrent.threadsynchelper.MatrixMock;
 import java7Concurrent.threadsynchelper.Participant;
 import java7Concurrent.threadsynchelper.PrintQueue;
+import java7Concurrent.threadsynchelper.Producer;
 import java7Concurrent.threadsynchelper.Results;
 import java7Concurrent.threadsynchelper.Searcher;
 import java7Concurrent.threadsynchelper.Videoconference;
@@ -121,5 +126,28 @@ public class concurrentThreadSyncHelperTest {
 		}
 		
 		System.out.println("Terminated: " + phaser.isTerminated());
+	}
+	
+	@Test
+	public void testExchanger() {
+		List<String> buffer1 = new ArrayList<>();
+		List<String> buffer2 = new ArrayList<>(); 
+		Exchanger<List<String>> exchanger = new Exchanger<>();
+		
+		Producer producer = new Producer(buffer1, exchanger);
+		Consumer consumer = new Consumer(buffer2, exchanger);
+		
+		Thread threadProducer = new Thread(producer);
+		Thread threadConsumer = new Thread(consumer);
+		
+		threadProducer.start();
+		threadConsumer.start();
+		
+		try {
+			threadProducer.join();
+			threadConsumer.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }

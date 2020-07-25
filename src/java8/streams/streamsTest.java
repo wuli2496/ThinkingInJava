@@ -2,8 +2,12 @@ package java8.streams;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -100,4 +104,30 @@ public class streamsTest {
 		}
 		
 	}
+	
+	@Test
+	public void testReduceSum() {
+		List<Integer> numbers = Arrays.asList(1, 2, 3);
+		int ans = numbers.stream().reduce(0, (a, b) -> a + b);
+		Assert.assertEquals(ans, 6);
+	}
+	
+	@Test
+	public void testReduceMax() {
+		List<Integer> numbers = Arrays.asList(1, 2, 3);
+		Optional<Integer> ans = numbers.stream().reduce(Integer::max);
+		ans.ifPresent(System.out::println);
+	}
+
+	@Test
+	public void testNumberStream() {
+		Stream<int[]> pythagoreanTriples = IntStream.rangeClosed(1, 100).boxed()
+				.flatMap(a ->
+						IntStream.rangeClosed(a, 100).filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
+						.mapToObj(b -> new int[]{a, b, (int)Math.sqrt(a * a + b * b)})
+				);
+
+		pythagoreanTriples.limit(5).forEach(t -> System.out.println(t[0] + "," + t[1] + "," +t[2]));
+	}
+
 }

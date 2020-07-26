@@ -1,43 +1,13 @@
 package java8.streams;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
-
-import net.test.chapter10_innerClasses.InheritInner;
-
-public class TransactionsTest {
-	
-	Trader raoul;
-	Trader mario;
-	Trader alan;
-	Trader brian;
-	List<Transaction> trasactions;
-	
-	@Before
-	public void init() {
-		raoul = new Trader("Raoul", "Cambridge");
-		mario = new Trader("Mario", "Milan");
-		alan = new Trader("Alan", "Cambridge");
-		brian = new Trader("Brian", "Cambridge");
-		
-		trasactions = Arrays.asList(
-				new Transaction(brian, 2011, 300),
-				new Transaction(raoul, 2012,  1000),
-				new Transaction(raoul, 2011, 400),
-				new Transaction(mario, 2012, 710),
-				new Transaction(mario, 2012, 700),
-				new Transaction(alan, 2012, 950));
-	}
-	
+public class TransactionsTest extends BaseTest {
 	/*
 	 * 找出2011年发生的所有交易，并按交易额排序（从低到高）
 	 */

@@ -1,11 +1,5 @@
 package java8.streams;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -14,25 +8,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import net.test.chapter11_container.ForEachCollections;
-
-public class numberStream {
-	private List<Dish> menu;
+public class numberStream extends BaseTest{
 	private int actual;
 	
 	@Before
 	public void init() {
-		menu = Arrays.asList(
-				new Dish("pork", false, 800, Dish.Type.MEAT),
-				new Dish("beef", false, 700, Dish.Type.MEAT),
-				new Dish("chicken", false, 400, Dish.Type.MEAT),
-				new Dish("french fries", true, 530, Dish.Type.OTHER),
-				new Dish("rice", true, 350, Dish.Type.OTHER),
-				new Dish("season fruit", true, 120, Dish.Type.OTHER),
-				new Dish("pizza", true, 550, Dish.Type.OTHER),
-				new Dish("prawns", false, 300, Dish.Type.FISH),
-				new Dish("salmon", false, 450, Dish.Type.FISH)
-				);
 		
 		for (Dish dish : menu) {
 			actual += dish.getCalories();
@@ -70,5 +50,24 @@ public class numberStream {
 	public void testNumberStreamRangeClosed() {
 		IntStream intStream = IntStream.rangeClosed(1,  100).filter(n -> n % 2 == 0);
 		System.out.println(intStream.count());
+	}
+	
+	@Test
+	public void testPythagoreanTriples() {
+		Stream<int[]> pythagoreanTriple = IntStream.rangeClosed(1,  100).boxed()
+													.flatMap(a -> 
+														IntStream.rangeClosed(a, 100).filter(b ->
+														Math.sqrt(a * a + b * b) % 1 == 0).mapToObj(b ->
+														new int[] {a, b, (int)Math.sqrt(a * a + b * b)}));
+		pythagoreanTriple.limit(5).forEach(t -> System.out.println(t[0] + "," + t[1] + "," + t[2]));
+	}
+	
+	@Test
+	public void testPythagoreanTriples2() {
+		Stream<double[]> pythagoreanTriple = IntStream.rangeClosed(1,  100).boxed()
+				.flatMap(a -> IntStream.rangeClosed(a, 100)
+						.mapToObj(b -> new double[] {a, b, Math.sqrt(a * a + b * b)})
+						.filter(t -> t[2] % 1 == 0));
+		pythagoreanTriple.limit(5).forEach(t -> System.out.println(t[0] + "," + t[1] + "," + t[2]));
 	}
 }

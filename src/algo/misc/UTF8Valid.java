@@ -1,4 +1,4 @@
-package misc;
+package algo.misc;
 
 public class UTF8Valid {
 	public boolean validUtf8(int[] data) {

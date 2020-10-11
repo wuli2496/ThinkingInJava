@@ -1,4 +1,4 @@
-package misc;
+package algo.misc;
 
 public interface LISAlgo
 {

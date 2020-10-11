@@ -1,4 +1,4 @@
-package misc;
+package algo.misc;
 
 import java.util.Arrays;
 

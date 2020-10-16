@@ -4,11 +4,11 @@ import lombok.Data;
 
 public class FloydCycleAlgo {
 	@Data
-	public static class ListNode {
-		private int val;
-		private ListNode next;
+	public static class ListNode<T> {
+		private T val;
+		private ListNode<T> next;
 		
-		public ListNode(int x) {
+		public ListNode(T x) {
 			val = x;
 			next = null;
 		}
@@ -20,8 +20,8 @@ public class FloydCycleAlgo {
 	}
 	
 	@Data
-	public static class Result {
-		private ListNode start;
+	public static class Result<T> {
+		private ListNode<T> start;
 		private int cycleLen;
 		private boolean cycle;
 		
@@ -32,25 +32,25 @@ public class FloydCycleAlgo {
 		}
 	}
 	
-	public Result detectCycle(ListNode head) {
+	public <T> Result<T> detectCycle(ListNode<T> head) {
 		if (head == null) {
-			return new Result();
+			return new Result<>();
 		}
 		
-		ListNode hare = head;
-		ListNode tortoise = head;
+		ListNode<T> hare = head;
+		ListNode<T> tortoise = head;
 		while (hare != null) {
 			tortoise = tortoise.next;
 			if (hare.next != null) {
 				hare = hare.next.next;
 			} else {
-				return new Result();
+				return new Result<>();
 			}
 			
 			if (hare == tortoise) {
-				Result result = new Result();
+				Result result = new Result<>();
 				result.cycle = true;
-				ListNode ptr = head;
+				ListNode<T> ptr = head;
 				while (ptr != tortoise) {
 					ptr = ptr.next;
 					tortoise = tortoise.next;
@@ -67,6 +67,6 @@ public class FloydCycleAlgo {
 				return result;
 			}
 		}
-		return new Result();
+		return new Result<>();
 	}
 }

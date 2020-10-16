@@ -9,9 +9,9 @@ import algo.FloydCycleAlgo.Result;
 public class FloydCycleAlgoTest {
 	@Test
 	public void testFloydCycleAlgo() {
-		ListNode listNode1 = new ListNode(1);
-		ListNode listNode2 = new ListNode(2);
-		ListNode listNode3 = new ListNode(3);
+		ListNode<Integer> listNode1 = new ListNode<>(1);
+		ListNode<Integer> listNode2 = new ListNode<>(2);
+		ListNode<Integer> listNode3 = new ListNode<>(3);
 	
 		listNode1.setNext(listNode2);
 		listNode2.setNext(listNode3);
